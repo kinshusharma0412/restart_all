@@ -52,7 +52,8 @@ def hibernation(x):
 print(scheduler.add_job(all_restart_hibernation, 'interval', minutes=5,args=("x",)))
 def main():
 	scheduler.start()
-	
+	while True:
+		time.sleep(5)
 	
 if __name__ == '__main__':
     main()#
