@@ -1,7 +1,7 @@
 import requests, os, time
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
-
+from pyrogram.methods.utilities.idle import idle
 
 
 headers = {
@@ -52,8 +52,6 @@ def hibernation(x):
 print(scheduler.add_job(all_restart_hibernation, 'interval', minutes=5,args=("x",)))
 def main():
 	scheduler.start()
-	while True:
-		time.sleep(5)
-	
+	idle()
 if __name__ == '__main__':
     main()#
