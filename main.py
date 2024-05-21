@@ -1,7 +1,7 @@
 import requests, os, time
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 scheduler = AsyncIOScheduler(timezone="Asia/kolkata")
-
+import asyncio
 
 
 headers = {
@@ -50,9 +50,14 @@ def hibernation(x):
 	print(response.text)
 
 print(scheduler.add_job(all_restart_hibernation, 'interval', minutes=5,args=("x",)))
-def main():
-	scheduler.start()
-	while True:
-		time.sleep(30)
-if __name__ == '__main__':
-    main()#
+
+async def main():
+    scheduler.start()
+    while True:
+        #await asyncio.create_task(bar())
+        await asyncio.sleep(1)
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.create_task(main())
+    loop.run_forever()
